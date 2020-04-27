@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Mongo</title>
+</head>
+
+<body>
+
+    <input id="product" type="text" placeholder="Product">
+    <button id="addProduct">Add Product</button>
+
+    <script>
+
+        
+
+        const AddProduct = document.getElementById("addProduct");
+        AddProduct.addEventListener("click", () => {
+            const product = document.getElementById('product').value;
+            const productName = ({ product })
+            console.log(productName);
+            fetch('http://localhost:4200/addProduct', {
+            method: 'POST',
+            body: JSON.stringify(productName),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(json => console.log(json))
+
+
+        })
+    </script>
+</body>
+
+</html>
