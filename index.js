@@ -40,6 +40,29 @@ app.get('/Food/:id', (req, res) => {
     });
 })
 
+app.post("/placeOrder", (req, res) => {
+    const orderDetails = req.body;
+    orderDetails.orderDate = new Date();
+    console.log(orderDetails)
+    const client = new MongoClient(uri, { useNewUrlParser: true });
+    client.connect(err => {
+      const collection = client.db("hotOnion").collection("orders");
+  
+      collection.insertOne(orderDetails, (err, documents) => {
+        if (err) {
+          res.status(500).send({ message: err })
+        } else {
+          console.log("successfully inserted", documents);
+          res.send(documents.ops[0]);
+        }
+  
+      });
+  
+      //client.close();
+    });
+  
+  
+  })
 
 
 
